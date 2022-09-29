@@ -1,0 +1,79 @@
+@import "../../style/mixin.scss";
+
+.gallery_info{
+    display: flex;
+    justify-content: space-between;
+    height: 250px;
+    box-shadow: 0px 4px 7px rgb(116, 111, 111);
+    margin-top: 40px;
+    max-width: 1100px;
+}
+
+.gallery_hero{
+    width: calc(100%/12*6);
+    display: flex;
+    align-items: center;
+    img{
+        margin: 35px;
+        max-width: 180px;
+        max-height: 180px;
+    }
+    .gallery_descr{
+        display: flex;
+        flex-direction: column;
+        width: calc(100%/12*6);
+        
+        h2{
+            padding: 0;
+            margin: 0;
+            font-family: RobotoCondensed;
+            font-size: 22px;
+            text-transform: uppercase;
+        }
+        p{
+            font-family: RobotoCondensed;
+            font-size: 14px;
+        }
+    }
+}
+.gallery_random{
+    position: relative;
+    width: calc(100%/12*6);
+    background: #232222;
+    
+    p{
+        font-family: RobotoCondensedBold;
+        font-size: 24px;
+        color: white;
+        margin-left: 40px;
+        margin-top: 27px;
+
+    }
+    #mjolnir{
+        position: absolute;
+        right: -40px;
+        bottom: 10px;
+        width: 43%;
+    
+    }
+    a{
+        background: red;
+        @include Btns;
+        margin-left: 40px;
+    }
+}
+.gallery_btns{
+    display: flex;
+    max-width: 240px;
+    justify-content: space-between;
+    position: relative;
+    bottom: 10px;
+    right: 5px;
+    gap: 30px;
+    
+    a{
+        background: red;
+        @include Btns;
+    }
+}
+

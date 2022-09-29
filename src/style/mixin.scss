@@ -1,0 +1,12 @@
+@mixin Btns{
+    display: flex;
+    width: 100px;
+    height: 40px;
+    margin: 5px;
+    background: #9F0013;
+    color: white;
+    font-family: RobotoCondensed;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(100% 0, 100% 49%, 100% 71%, 87% 100%, 59% 100%, 33% 100%, 0 100%, 0 26%, 15% 0);
+}

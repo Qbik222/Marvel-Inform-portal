@@ -1,0 +1,33 @@
+.gallery_card{
+    display: flex;
+    flex-direction: column;
+    width: calc(100%/12*4.77);
+    margin-top: 49px;
+    margin-left: 20px;
+    // border: 1px solid black;
+    box-shadow: 0px 0px 10px gray;
+    max-height: 763px;
+    padding: 20px;
+    box-sizing: border-box;
+    img{
+        max-width: 150px;
+        max-height: 150px;
+    }
+    .gallery_btns{
+        display: flex;
+        flex-direction: column;
+        line-height: 0;
+        gap: 7px;
+        width: 120px;
+        h2{
+            margin-bottom: 30px;
+        }
+    }
+}
+.gallery_descr{
+    display: flex;
+}
+.gallery_header{
+    display: flex;
+    gap: 20px;
+}

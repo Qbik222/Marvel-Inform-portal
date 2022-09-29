@@ -1,0 +1,13 @@
+@import "../../style/mixin.scss";
+
+
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.gallery_wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
