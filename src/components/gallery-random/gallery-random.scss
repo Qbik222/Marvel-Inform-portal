@@ -1,42 +1,55 @@
 @import "../../style/mixin.scss";
 
-.gallery_info{
+.random_info{
     display: flex;
     justify-content: space-between;
     height: 250px;
     box-shadow: 0px 4px 7px rgb(116, 111, 111);
     margin-top: 40px;
     max-width: 1100px;
+    width: 100%;
 }
 
-.gallery_hero{
+.random_hero{
     width: calc(100%/12*6);
     display: flex;
     align-items: center;
+    position: relative;
+    justify-content: space-between;
+    flex-direction: column;
+
     img{
+        position: absolute;
+        left: 0px;
         margin: 35px;
-        max-width: 180px;
-        max-height: 180px;
+        width: 180px;
+        height: 180px;
     }
-    .gallery_descr{
+    .random_descr{
         display: flex;
         flex-direction: column;
         width: calc(100%/12*6);
         
         h2{
             padding: 0;
-            margin: 0;
+            margin-left: 110px;
+            margin-top: 40px;
             font-family: RobotoCondensed;
             font-size: 22px;
             text-transform: uppercase;
+            width: 100%;
         }
         p{
+            position: relative;
+            left: 100px;
+            bottom: 20px;
             font-family: RobotoCondensed;
             font-size: 14px;
+            
         }
     }
 }
-.gallery_random{
+.random_change{
     position: relative;
     width: calc(100%/12*6);
     background: #232222;
@@ -62,18 +75,45 @@
         margin-left: 40px;
     }
 }
-.gallery_btns{
+.random_btns{
     display: flex;
     max-width: 240px;
     justify-content: space-between;
-    position: relative;
-    bottom: 10px;
-    right: 5px;
+    position: absolute;
+    bottom: 30px;
+    right: 70px;
     gap: 30px;
+
     
     a{
         background: red;
         @include Btns;
-    }
+    };
+   
 }
 
+
+#refreshHero{
+    position: relative;
+    left: 35px;
+    top: 9px;
+    background: red;
+    @include Btns;
+    font-size: 14px;
+    cursor: pointer;
+
+}
+
+#refreshHero:hover{
+    position: relative;
+   top: 6px;
+   left: 33px;
+   transition: all 0.3s;
+    
+}
+#refreshHero:active{
+    position: relative;
+    left: 35px;
+    top: 9px;
+    transition: all 0.1s;
+}

@@ -2,14 +2,14 @@
 import "./gallery.scss"
 
 import GalleryCard from "../gallery-card/gallery-card";
-import GalleryInfo from "../gallery-info/gallery-info";
+import GalleryRandom from "../gallery-random/gallery-random";
 import GalleryItems from "../gallery-items/gallery-items";
 
 function Gallery() {
 
     return(
         <div className="gallery">
-               <GalleryInfo/>
+               <GalleryRandom/>
             <div className="gallery_wrapper">
              
                 <GalleryItems/>
