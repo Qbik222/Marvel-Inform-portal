@@ -8,16 +8,18 @@ import "./gallery-random.scss"
 import mjolnir from "../../img/headerRandom.png"
 
 class GalleryRandom extends Component{
-    constructor(props){
-        super(props);
-        this.updateCharacter();
-    }
+
     state = {
         char: {},
         loading: true,
         error: false,
     }
     marvelService = new MarvelService();
+
+
+    componentDidMount(){
+        this.updateCharacter();
+    }    
 
     onCharLoaded = (char) =>{
         this.setState({
