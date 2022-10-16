@@ -51,7 +51,8 @@ class GalleryItems extends Component{
             return(
                 <div className="gallery-item" 
                     key={item.id}
-                    style = {imgStyle}>
+                    style = {imgStyle}
+                    onClick = {() => this.props.onCharSelected(item.id)} >
                         <img src={item.thumbnail} alt={item.name} />
                         <p>{item.name}</p>
                 </div>
@@ -63,7 +64,7 @@ class GalleryItems extends Component{
                 {items}
             </div>
         ) 
-        // return items;
+
 
     }
 

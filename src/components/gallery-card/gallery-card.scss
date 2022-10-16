@@ -20,7 +20,20 @@
         gap: 7px;
         width: 120px;
         h2{
+            display: flex;
             margin-bottom: 30px;
+            width: 100vw;
+            height: auto;
+        }
+        a{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 30px;
+            margin: 10px 0;
+            background: red;
+            clip-path: polygon(11% 0, 100% 0, 100% 36%, 100% 67%, 90% 100%, 0 100%, 0 35%);
         }
     }
 }
@@ -30,4 +43,13 @@
 .gallery_header{
     display: flex;
     gap: 20px;
+}
+.comics_list{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    li{
+        box-shadow: 2px 4px 5px grey;
+
+    }
 }
