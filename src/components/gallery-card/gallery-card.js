@@ -3,7 +3,7 @@ import Spiner from "../spinner/spinner";
 import ErrorMessage from "../erorr-message/erorr-message";
 import MarvelService from "../../services/marvel-service";
 import Skeleton from "../app/skeleton/skeleton";
-
+import PropTypes from "prop-types"
 import { Component } from "react";
 import "./gallery-card.scss"
 
@@ -151,4 +151,10 @@ import "./gallery-card.scss"
             </>
         )
     }
+
+
+    GalleryCard.propTypes = {
+        charId: PropTypes.number
+    }
+
     export default GalleryCard;

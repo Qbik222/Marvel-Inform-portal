@@ -17,6 +17,7 @@ class GalleryItems extends Component{
         error: false,
         offset: 210,
         newItemLoading: false,
+        charEnded : false
 
     }
 
@@ -43,11 +44,17 @@ class GalleryItems extends Component{
   }
 
     charListLoaded = (newCharList) =>{
+        let ended = false;
+        if (newCharList.length < 9){
+            ended = true;
+        }
+
     this.setState(({offset, charList}) => ({
         charList: [...newCharList],
         loading: false,
         newItemLoading: false,
         offset: offset + 9,
+        charEnded: ended
     }))
     }   
 
@@ -86,7 +93,7 @@ class GalleryItems extends Component{
 
     render(){
 
-        const {charList, loading, error, newItemLoading, offset} = this.state;
+        const {charList, loading, error, newItemLoading, offset, charEnded} = this.state;
         const errorMessage = error ? <ErrorMessage/> : null;
         const spinner = loading ? <Spiner className="center"/> : null;
         const item = this.renderWithoutImg(charList);
@@ -100,6 +107,7 @@ class GalleryItems extends Component{
             <button id="galleryBtn"
             disabled={newItemLoading}
             onClick={() => this.onRequest(offset)}
+            style={{"display" : charEnded ? "none" : "block"}}
             >
                 REFRESH</button>
             </div>
