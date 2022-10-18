@@ -15,24 +15,40 @@ class GalleryItems extends Component{
         charList: [],
         loading: true,
         error: false,
+        offset: 210,
+        newItemLoading: false,
+
     }
 
     MarvelService = new MarvelService();
 
 
   componentDidMount(){
-    this.MarvelService.getAllCharacters()
-        .then(this.charListLoaded)
-        .catch(this.onError)
+    this.onRequest();
   }
 
 
-  
-    charListLoaded = (charList) =>{
+  onRequest = (offset) =>{
+        this.charListLoading();
+        this.MarvelService.getAllCharacters(offset)
+            .then(this.charListLoaded)
+            .catch(this.onError)
+            
+  }
+
+  charListLoading = () =>{
     this.setState({
-        charList,
-        loading: false
+        newItemLoading: true,
     })
+  }
+
+    charListLoaded = (newCharList) =>{
+    this.setState(({offset, charList}) => ({
+        charList: [...newCharList],
+        loading: false,
+        newItemLoading: false,
+        offset: offset + 9,
+    }))
     }   
 
     onError = () =>{
@@ -70,7 +86,7 @@ class GalleryItems extends Component{
 
     render(){
 
-        const {charList, loading, error} = this.state;
+        const {charList, loading, error, newItemLoading, offset} = this.state;
         const errorMessage = error ? <ErrorMessage/> : null;
         const spinner = loading ? <Spiner className="center"/> : null;
         const item = this.renderWithoutImg(charList);
@@ -81,7 +97,11 @@ class GalleryItems extends Component{
              {spinner}
              {errorMessage}
              {item}
-            <a href="asdas" id="galleryBtn">LOAD MORE</a>
+            <button id="galleryBtn"
+            disabled={newItemLoading}
+            onClick={() => this.onRequest(offset)}
+            >
+                REFRESH</button>
             </div>
         )
     }
