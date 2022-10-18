@@ -4,6 +4,7 @@ import { Component } from "react";
 import GalleryCard from "../gallery-card/gallery-card";
 import GalleryRandom from "../gallery-random/gallery-random";
 import GalleryItems from "../gallery-items/gallery-items";
+import ErrorBoundary from "../error-boundary/error-boundary";
 
 class Gallery extends Component {
 
@@ -20,12 +21,19 @@ class Gallery extends Component {
     render(){
         return(
             <div className="gallery">
-                   <GalleryRandom/>
+                   <ErrorBoundary>
+                        <GalleryRandom/>
+                   </ErrorBoundary>
+                  
                 <div className="gallery_wrapper">
-                 
-                    <GalleryItems onCharSelected={this.onCharSelected}/>
-                    <GalleryCard charId={this.state.selectedChar}/>
-                   
+                
+                    <ErrorBoundary>
+                        <GalleryItems onCharSelected={this.onCharSelected}/>
+                    </ErrorBoundary>
+
+                    <ErrorBoundary>
+                        <GalleryCard charId={this.state.selectedChar}/>
+                    </ErrorBoundary>
                 </div>
                 
              

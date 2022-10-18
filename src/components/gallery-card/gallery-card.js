@@ -3,6 +3,7 @@ import Spiner from "../spinner/spinner";
 import ErrorMessage from "../erorr-message/erorr-message";
 import MarvelService from "../../services/marvel-service";
 import Skeleton from "../app/skeleton/skeleton";
+
 import { Component } from "react";
 import "./gallery-card.scss"
 
@@ -39,13 +40,14 @@ import "./gallery-card.scss"
             this.updateChar();
         }
 
-        componentDidUpdate(prevProps, prevState){
+        componentDidUpdate(prevProps){
             if(this.props.charId !== prevProps.charId){
                 this.updateChar();
             }
        
         }
 
+     
 
         updateChar = () =>{
             const {charId} = this.props;
@@ -57,6 +59,7 @@ import "./gallery-card.scss"
                 .getCharacter(charId)
                 .then(this.onCharLoaded)
                 .catch(this.onError);
+
         }
 
         onCharLoading = () =>{
