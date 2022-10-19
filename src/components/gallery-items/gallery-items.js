@@ -1,5 +1,5 @@
 import "./gallery-items.scss"
-import { Component } from "react";
+import React, { Component } from "react";
 import MarvelService from "../../services/marvel-service";
 
 import ErrorMessage from "../erorr-message/erorr-message";
@@ -10,6 +10,7 @@ import Spiner from "../spinner/spinner";
 
 
 class GalleryItems extends Component{
+
 
     state = {
         charList: [],
@@ -26,8 +27,23 @@ class GalleryItems extends Component{
 
   componentDidMount(){
     this.onRequest();
+  
   }
 
+  itemRefs = [];
+
+  focusOnItem = (id) =>{
+    this.itemRefs.forEach(item => {
+        item.classList.remove("Char__selected");
+        
+    })
+    this.itemRefs[id].classList.add("Char__selected");
+    this.itemRefs[id].focus();
+  }
+
+  setRef = (ref) => {
+    this.itemRefs.push(ref);
+  }
 
   onRequest = (offset) =>{
         this.charListLoading();
@@ -66,7 +82,7 @@ class GalleryItems extends Component{
     }
 
     renderWithoutImg(arr){
-        const items = arr.map((item) =>{
+        const items = arr.map((item, i) =>{
             let imgStyle = {"objectFit": "cover"}
             if(item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg'){
                 imgStyle = {"objectFit": "unset"};
@@ -75,7 +91,15 @@ class GalleryItems extends Component{
                 <div className="gallery-item" 
                     key={item.id}
                     style = {imgStyle}
-                    onClick = {() => this.props.onCharSelected(item.id)} >
+                    onClick = {() => {
+                        this.props.onCharSelected(item.id)
+                        this.focusOnItem(i)
+                    
+                     
+                     
+                    }} 
+                    ref={this.setRef}
+                   >
                         <img src={item.thumbnail} alt={item.name} />
                         <p>{item.name}</p>
                 </div>
