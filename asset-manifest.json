@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Marvel-Inform-portal/static/css/main.0fe5cb0c.css",
-    "main.js": "/Marvel-Inform-portal/static/js/main.48125142.js",
+    "main.css": "/Marvel-Inform-portal/static/css/main.7c54c0ab.css",
+    "main.js": "/Marvel-Inform-portal/static/js/main.79ed5417.js",
     "static/js/787.a2690f42.chunk.js": "/Marvel-Inform-portal/static/js/787.a2690f42.chunk.js",
     "static/media/error.gif": "/Marvel-Inform-portal/static/media/error.23cc105d330a65d39d40.gif",
     "static/media/Roboto-BoldCondensed.ttf": "/Marvel-Inform-portal/static/media/Roboto-BoldCondensed.01decb86b9d1459ffdfb.ttf",
@@ -9,12 +9,12 @@
     "static/media/bg asset.png": "/Marvel-Inform-portal/static/media/bg asset.96cbe09bed67b0d04328.png",
     "static/media/headerRandom.png": "/Marvel-Inform-portal/static/media/headerRandom.4877bd12f637c476f009.png",
     "index.html": "/Marvel-Inform-portal/index.html",
-    "main.0fe5cb0c.css.map": "/Marvel-Inform-portal/static/css/main.0fe5cb0c.css.map",
-    "main.48125142.js.map": "/Marvel-Inform-portal/static/js/main.48125142.js.map",
+    "main.7c54c0ab.css.map": "/Marvel-Inform-portal/static/css/main.7c54c0ab.css.map",
+    "main.79ed5417.js.map": "/Marvel-Inform-portal/static/js/main.79ed5417.js.map",
     "787.a2690f42.chunk.js.map": "/Marvel-Inform-portal/static/js/787.a2690f42.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0fe5cb0c.css",
-    "static/js/main.48125142.js"
+    "static/css/main.7c54c0ab.css",
+    "static/js/main.79ed5417.js"
   ]
 }
