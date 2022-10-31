@@ -4,7 +4,7 @@ import ErrorMessage from "../erorr-message/erorr-message";
 import MarvelService from "../../services/marvel-service";
 import Skeleton from "../app/skeleton/skeleton";
 import PropTypes from "prop-types"
-import { Component } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./gallery-card.scss"
 
 
@@ -26,71 +26,54 @@ import "./gallery-card.scss"
 
 
 
-    class GalleryCard extends Component{
+    const GalleryCard = (props) =>{
 
-        state = {
-            char: null,
-            loading: false,
-            error: false,
-        }
+        const [char, setChar] = useState(null);
+        const [loading, setLoading] = useState(false);
+        const [error, setError] = useState(false);
+     
 
-        marvelService = new MarvelService();
+       const marvelService = new MarvelService();
 
-        componentDidMount(){
-            this.updateChar();
-        }
-
-        componentDidUpdate(prevProps){
-            if(this.props.charId !== prevProps.charId){
-                this.updateChar();
-            }
-       
-        }
+        useEffect(() => {
+            updateChar();
+        },[props.charId])
 
      
 
-        updateChar = () =>{
-            const {charId} = this.props;
+    const updateChar = () =>{
+            const {charId} = props;
             if (!charId){
                 return;
             }
-            this.onCharLoading();
-            this.marvelService
-                .getCharacter(charId)
-                .then(this.onCharLoaded)
-                .catch(this.onError);
+            onCharLoading();
+            marvelService.getCharacter(charId)
+                .then(onCharLoaded)
+                .catch(onError);
 
         }
 
-        onCharLoading = () =>{
-            this.setState({
-                loading: true,
-            })
+    const onCharLoading = () =>{
+           setLoading(true);
         }
 
-        onCharLoaded = (char) =>{
-            this.setState({
-                char,
-                loading: false,
-            })
+    const onCharLoaded = (char) =>{
+            setChar(char);
+            setLoading(false);
+        
         }
 
-        onError = () =>{
-            this.setState({
-                error: true,
-                loading: false,
-            })
+    const onError = () =>{
+    
+            setError(true);
+            setLoading(false);
         }
 
-        render(){
-      
-            const {char, loading, error} = this.state
-
-            const skeleton = char || loading || error ? null : <Skeleton/>;
-            const errorMessage = error ? <ErrorMessage/> : null;
-            const spiner = loading ? <Spiner/> : null;
-            const content = !(loading || error || !char) ? <View char={char}/> : null
-            console.log(content);
+    const skeleton = char || loading || error ? null : <Skeleton/>;
+    const errorMessage = error ? <ErrorMessage/> : null;
+    const spiner = loading ? <Spiner/> : null;
+    const content = !(loading || error || !char) ? <View char={char}/> : null
+    console.log(content);
 
             return(
 
@@ -106,7 +89,6 @@ import "./gallery-card.scss"
         
             )
         }
-    }
 
 
     const View = ({char}) => {

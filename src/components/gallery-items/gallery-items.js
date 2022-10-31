@@ -1,5 +1,5 @@
 import "./gallery-items.scss"
-import React, { Component } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MarvelService from "../../services/marvel-service";
 
 import ErrorMessage from "../erorr-message/erorr-message";
@@ -9,98 +9,99 @@ import Spiner from "../spinner/spinner";
 
 
 
-class GalleryItems extends Component{
+const GalleryItems = (props) => {
 
 
-    state = {
-        charList: [],
-        loading: true,
-        error: false,
-        offset: 210,
-        newItemLoading: false,
-        charEnded : false
-
-    }
-
-    MarvelService = new MarvelService();
+    const [charList, setCharList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [offset, setOffset] = useState(250);
+    const [newItemLoading, setNewItemLoading] = useState(false);
+    const [charEnded, setCharEnded] = useState(false);
 
 
-  componentDidMount(){
-    this.onRequest();
-  
-  }
 
-  itemRefs = [];
 
-  focusOnItem = (id) =>{
-    this.itemRefs.forEach(item => {
+  const marvelService = new MarvelService();
+
+
+    useEffect(() =>{
+        onRequest();
+    }, [])
+
+
+
+ const itemRefs = useRef([]);
+
+  const focusOnItem = (id) =>{
+    itemRefs.current.forEach(item => {
         item.classList.remove("Char__selected");
+    })
+    itemRefs[id].classList.add("Char__selected");
+
+  }
+
+
+
+
+ const charListLoading = () =>{
         
-    })
-    this.itemRefs[id].classList.add("Char__selected");
-    this.itemRefs[id].focus();
+    setNewItemLoading(true);
+    
   }
 
-  setRef = (ref) => {
-    this.itemRefs.push(ref);
-  }
-
-  onRequest = (offset) =>{
-        this.charListLoading();
-        this.MarvelService.getAllCharacters(offset)
-            .then(this.charListLoaded)
-            .catch(this.onError)
-            
-  }
-
-  charListLoading = () =>{
-    this.setState({
-        newItemLoading: true,
-    })
-  }
-
-    charListLoaded = (newCharList) =>{
+   const charListLoaded = (newCharList) =>{
         let ended = false;
         if (newCharList.length < 9){
             ended = true;
         }
 
-    this.setState(({offset, charList}) => ({
-        charList: [...newCharList],
-        loading: false,
-        newItemLoading: false,
-        offset: offset + 9,
-        charEnded: ended
-    }))
+        setCharList(charList => [...charList , ...newCharList]);
+        setLoading(loading => false);
+        setNewItemLoading(newItemLoading => false);
+        setOffset(offset => offset + 9);
+        setCharEnded(charEnded => ended);
+
+
     }   
 
-    onError = () =>{
-        this.setState({
-            loading: false,
-            error: true,
-        })
+    const onRequest = (offset) =>{
+        charListLoading();
+        marvelService.getAllCharacters(offset)
+            .then(charListLoaded)
+            .catch(onError)
+            
+  }
+   const onError = () =>{
+
+        setError(true);
+        setLoading(false);
     }
 
-    renderWithoutImg(arr){
+   function renderWithoutImg(arr){
         const items = arr.map((item, i) =>{
             let imgStyle = {"objectFit": "cover"}
             if(item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg'){
                 imgStyle = {"objectFit": "unset"};
             }
             return(
-                <div className="gallery-item" 
+                <div 
+               
+                    className="gallery-item" 
                     key={item.id}
+                    ref={el => itemRefs.current[i] = el}
                     style = {imgStyle}
                     onClick = {() => {
-                        this.props.onCharSelected(item.id)
-                        this.focusOnItem(i)
+                        props.onCharSelected(item.id)
+                        focusOnItem(i)
                     
                      
                      
                     }} 
-                    ref={this.setRef}
+                  
                    >
-                        <img src={item.thumbnail} alt={item.name} />
+                        <img src={item.thumbnail} alt={item.name} 
+                         />
                         <p>{item.name}</p>
                 </div>
             )
@@ -115,12 +116,10 @@ class GalleryItems extends Component{
 
     }
 
-    render(){
-
-        const {charList, loading, error, newItemLoading, offset, charEnded} = this.state;
+        
         const errorMessage = error ? <ErrorMessage/> : null;
         const spinner = loading ? <Spiner className="center"/> : null;
-        const item = this.renderWithoutImg(charList);
+        const item = renderWithoutImg(charList);
 
 
         return(
@@ -130,13 +129,13 @@ class GalleryItems extends Component{
              {item}
             <button id="galleryBtn"
             disabled={newItemLoading}
-            onClick={() => this.onRequest(offset)}
+            onClick={() => onRequest(offset)}
             style={{"display" : charEnded ? "none" : "block"}}
             >
-                REFRESH</button>
+                LOAD MORE</button>
             </div>
         )
-    }
+
 
 
 }
